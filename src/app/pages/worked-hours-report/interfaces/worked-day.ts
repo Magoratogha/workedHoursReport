@@ -1,5 +1,6 @@
 export interface WorkedDay {
-    date: Date;
+    startDate: Date;
+    endDate: Date;
     weekNumber: number;
     dayHours: number;
     nightHours: number;

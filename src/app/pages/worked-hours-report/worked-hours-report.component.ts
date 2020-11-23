@@ -67,15 +67,14 @@ export class WorkedHoursReportComponent implements OnInit {
     });
   }
 
-  private addWorkedDay(date: Date): void {
-    const tempDate = new Date(date);
-    tempDate.setHours(0, 0, 0);
+  private addWorkedDay(startDate: Date, endDate): void {
     this.workedDays.push({
-      weekNumber: this.getDateWeek(date),
+      weekNumber: this.getDateWeek(startDate),
       dayHours: Number(this.dayHours.toFixed(1)),
       nightHours: Number(this.nightHours.toFixed(1)),
       sundayHours: Number(this.sundayHours.toFixed(1)),
-      date: tempDate
+      startDate,
+      endDate
     });
     this.dayHours = 0;
     this.nightHours = 0;
@@ -101,10 +100,12 @@ export class WorkedHoursReportComponent implements OnInit {
   }
 
   private calculateServiceHoursPerDay(startDate: Date, endDate: Date): void {
+    let tempDate: Date;
     if (startDate.getHours() === endDate.getHours()) {
       this.setWorkedMinutes(startDate, false, endDate);
     } else {
       if (startDate.getMinutes() !== 0) {
+        tempDate = new Date(startDate);
         this.setWorkedMinutes(startDate, true);
       }
       this.setWorkedTimeBetweenTwoHours(startDate.getHours(), endDate.getHours(), startDate.getDay());
@@ -112,7 +113,7 @@ export class WorkedHoursReportComponent implements OnInit {
         this.setWorkedMinutes(endDate, false);
       }
     }
-    this.addWorkedDay(startDate);
+    this.addWorkedDay(tempDate ? tempDate : startDate, endDate);
   }
 
   private setWorkedTimeBetweenTwoHours(startHour: number, endHour: number, currentDay: number): void {
