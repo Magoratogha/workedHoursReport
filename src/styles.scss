@@ -46,7 +46,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: flex;
     align-items: center;
     justify-content: center;
-    span {
-        padding-right: 10px;
+    .mat-spinner {
+        margin-left: 10px;
     }
+}
+
+h1 {
+    padding-bottom: 20px;
 }

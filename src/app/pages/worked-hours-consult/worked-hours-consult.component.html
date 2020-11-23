@@ -1,1 +1,48 @@
-<p>worked-hours-consult works!</p>
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="container" fxLayoutGap="8%">
+    <div fxLayout="column" fxFlex="35%">
+        <div fxLayout fxFlex="grow" fxLayoutAlign="center center">
+            <h1>Información del trabajador</h1>
+        </div>
+        <form fxFlex="grow" fxFlex.lt-md="grow" fxLayout="row wrap" [formGroup]="consultingHoursForm" 
+            fxLayoutAlign="center center" autocomplete="off">
+            <div fxFlex="grow" class="form-field">
+                <mat-form-field appearance="outline">
+                    <mat-label>Identificación del técnico</mat-label>
+                    <input matInput placeholder="123456789" formControlName="workerID">
+                    <mat-error *ngIf="!consultingHoursForm.controls.workerID.valid">Campo requerido</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxFlex="grow" class="form-field">
+                <mat-form-field appearance="outline">
+                    <mat-label>Numero de la semana a consultar</mat-label>
+                    <input matInput placeholder="45" formControlName="weekNumber">
+                    <mat-error *ngIf="!consultingHoursForm.controls.weekNumber.valid">Campo requerido</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <div fxLayout fxFlex="grow" fxLayoutAlign="center center">
+            <button mat-flat-button color="primary" (click)="sendform()" [disabled]="!consultingHoursForm.valid || isReportSaving">
+                <div class="spinner-wrapper">
+                    <span>{{isReportSaving ? 'Buscando...': 'Consultar' }}</span>
+                <mat-spinner *ngIf="isReportSaving" diameter="20"></mat-spinner>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="workreport" fxFlex="50%">
+        <h1>Resumen horas trabajadas</h1>
+        <h3>Identificación del técnico: {{workreport.workerID}}</h3>
+        <h3>Número de la semana: {{workreport.weekNumber}}</h3>
+        <hr>
+        <div fxLayout="row">
+            <h4 fxFlex="33.3%">Horas Normales: {{workreport.dayHours}}</h4>
+            <h4 fxFlex="33.3%">Horas Nocturnas: {{workreport.nightHours}}</h4>
+            <h4 fxFlex="33.4%">Horas Dominicales: {{workreport.sundayHours}}</h4>
+        </div>
+        <div fxLayout="row">
+            <h4 fxFlex="33.3%">H. Normales Extra: {{workreport.extraDayHours}}</h4>
+            <h4 fxFlex="33.3%">H. Nocturnas Extra: {{workreport.extraNightHours}}</h4>
+            <h4 fxFlex="33.4%">H. Dominicales Extra {{workreport.extraSundayHours}}</h4>
+        </div>
+    </div>
+</div>

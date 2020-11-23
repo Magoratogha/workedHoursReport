@@ -21,6 +21,6 @@ export class ConnectionService {
   }
 
   public getHoursReport(workedID: string, weekNumber: string) {
-    this.http.get(this.HOST_API + this.getReportEnpoint + workedID + '/' + weekNumber).toPromise();
+    return this.http.get(this.HOST_API + this.getReportEnpoint + workedID + '/' + weekNumber).toPromise();
   }
 }
