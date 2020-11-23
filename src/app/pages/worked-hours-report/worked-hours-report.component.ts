@@ -48,17 +48,22 @@ export class WorkedHoursReportComponent implements OnInit {
 
   public sendform(): void {
     this.isReportSaving = true;
-    this.calculateServiceHours(this.workedHoursForm.value.jobStartDate, this.workedHoursForm.value.jobEndDate);
+    this.calculateServiceHours(new Date(this.workedHoursForm.value.jobStartDate),
+      new Date(this.workedHoursForm.value.jobEndDate));
     this.connectionService.sendHoursReport({
       idReport: this.workedHoursForm.value.jobID,
       idTechnical: this.workedHoursForm.value.workerID,
       workedDays: this.workedDays
     }).then(() => {
-      this.workedHoursForm.reset();
       this.isReportSaving = false;
+      this.workedHoursForm.controls.jobStartDate.reset();
+      this.workedHoursForm.controls.jobEndDate.reset();
+      this.workedDays = [];
     }).catch(() => {
-      this.workedHoursForm.reset();
       this.isReportSaving = false;
+      this.workedHoursForm.controls.jobStartDate.reset();
+      this.workedHoursForm.controls.jobEndDate.reset();
+      this.workedDays = [];
     });
   }
 
