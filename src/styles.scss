@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+    padding-top: 8%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+  
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+  
+@media (min-width: 960px) {
+    .container {
+        max-width: 930px;
+    }
+}
+  
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+.form-field {
+    padding: 0px 5px;
+    .mat-form-field {
+        width: 100%;
+    }
+}
+
+.spinner-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+        padding-right: 10px;
+    }
+}

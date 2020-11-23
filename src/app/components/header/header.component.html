@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <span>Horas Trabajadas</span>
+    <span class="header-spacer"></span>
+    <button mat-button aria-label="Report" 
+        [routerLink]="['/report']" [color]="rlaReport.isActive ? 'accent' : ''"
+        routerLinkActive #rlaReport="routerLinkActive">Reportar</button>
+    <button mat-button aria-label="Consult" 
+        [routerLink]="['/consult']" [color]="rlaConsult.isActive ? 'accent' : ''"
+        routerLinkActive #rlaConsult="routerLinkActive">Consultar</button>
+</mat-toolbar>

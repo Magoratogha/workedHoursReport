@@ -1,0 +1,49 @@
+<div fxLayout="row wrap" fxLayoutAlign="center center" class="container">
+    <div fxLayout fxFlex="grow" fxLayoutAlign="center center">
+        <h1>Información del servicio</h1>
+    </div>
+    <form fxFlex="60%" fxFlex.lt-md="grow" fxLayout="row wrap" fxLayoutAlign="center center"
+        [formGroup]="workedHoursForm" autocomplete="off">
+        <div fxFlex="50%" class="form-field">
+            <mat-form-field appearance="outline">
+                <mat-label>Identificación del técnico</mat-label>
+                <input matInput placeholder="123456789" formControlName="workerID">
+                <mat-error *ngIf="!workedHoursForm.controls.workerID.valid">Campo requerido</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%" class="form-field">
+            <mat-form-field appearance="outline">
+                <mat-label>Identificación del servicio</mat-label>
+                <input matInput placeholder="123456789" formControlName="jobID">
+                <mat-error *ngIf="!workedHoursForm.controls.jobID.valid">Campo requerido</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%" class="form-field">
+            <mat-form-field appearance="outline">
+                <mat-label>Hora inicio del servicio</mat-label>
+                <input matInput formControlName="jobStartDate" [ngxMatDatetimePicker]="startPicker" placeholder="11/21/2020, 18:00:00">
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #startPicker enableMeridian="true" showSeconds="true"></ngx-mat-datetime-picker>
+                <mat-error *ngIf="!workedHoursForm.controls.jobStartDate.valid">Campo requerido</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%" class="form-field">
+            <mat-form-field appearance="outline">
+                <mat-label>Hora fin del servicio</mat-label>
+                <input matInput formControlName="jobEndDate" [ngxMatDatetimePicker]="endPicker" placeholder="11/21/2020, 18:00:00">
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #endPicker enableMeridian="true" showSeconds="true"></ngx-mat-datetime-picker>
+                <mat-error *ngIf="workedHoursForm.controls.jobEndDate.hasError('required')">Campo requerido</mat-error>
+                <mat-error *ngIf="workedHoursForm.controls.jobEndDate.hasError('oldDate')">La fecha fin debe ser mayor a la hora inicio del servicio</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+    <div fxLayout fxFlex="grow" fxLayoutAlign="center center">
+        <button mat-flat-button color="primary" (click)="sendform()" [disabled]="!workedHoursForm.valid || isReportSaving">
+            <div class="spinner-wrapper">
+                <span>{{isReportSaving ? 'Guardando...': 'Enviar' }}</span>
+                <mat-spinner *ngIf="isReportSaving" diameter="20"></mat-spinner>
+            </div>
+        </button>
+    </div>
+</div>
