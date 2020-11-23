@@ -25,15 +25,8 @@ export class WorkedHoursConsultComponent implements OnInit {
   public sendform(): void {
     this.isReportSaving = true;
     this.connectionService.getHoursReport(this.consultingHoursForm.value.workerID,
-      this.consultingHoursForm.value.weekNumber).then((response: any) => {
-        this.workreport.dayHours = response.dayHours;
-        this.workreport.nightHours = response.nightHours;
-        this.workreport.sundayHours = response.sundayHours;
-        this.workreport.extraDayHours = response.extraDayHours;
-        this.workreport.extraNightHours = response.extraNightHours;
-        this.workreport.extraSundayHours = response.extraSundayHours;
-        this.workreport.workerID = response.idTechnical;
-        this.workreport.weekNumber = response.weekNumber;
+      this.consultingHoursForm.value.weekNumber).then((response: WorkReport) => {
+        this.workreport = response;
         this.isReportSaving = false;
       }).catch(() => {
         this.isReportSaving = false;

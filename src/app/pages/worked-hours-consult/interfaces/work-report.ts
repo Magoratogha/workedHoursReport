@@ -5,6 +5,6 @@ export interface WorkReport {
     extraDayHours: number;
     extraNightHours: number;
     extraSundayHours: number;
-    workerID: string;
+    idTechnical: string;
     weekNumber: string;
 }
