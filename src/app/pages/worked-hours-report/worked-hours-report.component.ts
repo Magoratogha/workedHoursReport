@@ -54,6 +54,10 @@ export class WorkedHoursReportComponent implements OnInit {
       idTechnical: this.workedHoursForm.value.workerID,
       workedDays: this.workedDays
     }).then(() => {
+      this.workedHoursForm.reset();
+      this.isReportSaving = false;
+    }).catch(() => {
+      this.workedHoursForm.reset();
       this.isReportSaving = false;
     });
   }
